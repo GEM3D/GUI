@@ -425,7 +425,7 @@ w = 0.0</property>
                                 <property name="halign">start</property>
                                 <property name="valign">center</property>
                                 <property name="margin_bottom">3</property>
-                                <property name="max_length">10</property>
+                                <property name="max_length">5</property>
                                 <property name="width_chars">10</property>
                                 <property name="caps_lock_warning">False</property>
                                 <property name="input_purpose">number</property>
@@ -443,7 +443,7 @@ w = 0.0</property>
                                 <property name="halign">start</property>
                                 <property name="valign">center</property>
                                 <property name="margin_bottom">3</property>
-                                <property name="max_length">10</property>
+                                <property name="max_length">5</property>
                                 <property name="width_chars">10</property>
                                 <property name="caps_lock_warning">False</property>
                                 <property name="input_purpose">number</property>
@@ -461,7 +461,7 @@ w = 0.0</property>
                                 <property name="halign">start</property>
                                 <property name="valign">center</property>
                                 <property name="margin_bottom">3</property>
-                                <property name="max_length">10</property>
+                                <property name="max_length">5</property>
                                 <property name="width_chars">10</property>
                                 <property name="caps_lock_warning">False</property>
                                 <property name="input_purpose">number</property>
@@ -1846,7 +1846,6 @@ w = 0.0</property>
                                     <child>
                                       <object class="GtkEntry" id="inletProfile_rough_z_o">
                                         <property name="visible">True</property>
-                                        <property name="sensitive">False</property>
                                         <property name="can_focus">True</property>
                                         <property name="halign">start</property>
                                         <property name="valign">center</property>
@@ -2438,7 +2437,7 @@ w = 0.0</property>
                                             <property name="width_chars">8</property>
                                             <property name="caps_lock_warning">False</property>
                                             <property name="input_purpose">number</property>
-                                            <signal name="focus-out-event" handler="is_int_positive" swapped="no"/>
+                                            <signal name="focus-out-event" handler="is_float_positive" swapped="no"/>
                                           </object>
                                           <packing>
                                             <property name="left_attach">2</property>
@@ -2455,7 +2454,7 @@ w = 0.0</property>
                                             <property name="width_chars">8</property>
                                             <property name="caps_lock_warning">False</property>
                                             <property name="input_purpose">number</property>
-                                            <signal name="focus-out-event" handler="is_int_positive" swapped="no"/>
+                                            <signal name="focus-out-event" handler="is_float_positive" swapped="no"/>
                                           </object>
                                           <packing>
                                             <property name="left_attach">4</property>
@@ -2472,7 +2471,7 @@ w = 0.0</property>
                                             <property name="width_chars">8</property>
                                             <property name="caps_lock_warning">False</property>
                                             <property name="input_purpose">number</property>
-                                            <signal name="focus-out-event" handler="is_int_positive" swapped="no"/>
+                                            <signal name="focus-out-event" handler="is_float_positive" swapped="no"/>
                                           </object>
                                           <packing>
                                             <property name="left_attach">6</property>

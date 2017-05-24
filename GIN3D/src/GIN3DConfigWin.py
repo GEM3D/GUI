@@ -49,7 +49,7 @@ class GIN3DConfigWin:
                 line_number += 1
                 l = line.strip().replace('\t', '')
                 if l.startswith('#<SolidGeometry True>'):
-		  cnfg['SolidGeometry'] = 'True'
+                    cnfg['SolidGeometry'] = 'True'
                 elif l.startswith('#<Same as Inlet Profile>'):
                     cnfg['IC_InletProfile'] = 'True'
                 elif l.startswith('#<TrackCoordFile>'):

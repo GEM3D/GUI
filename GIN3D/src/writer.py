@@ -206,10 +206,10 @@ class GIN3DConfigWriter:
             special_case = self.text('ic_list_specialCases')
             # Smooth Wall Log Law w/Sinusoidal Perturbations
             if special_case == '1':
-                cnfg_ic['InitialCondition'] = 'ComplexTerrainSinPerturb'
+                cnfg_ic['InitialCondition'] = 'TurbulentChannelX'
             # Rough Wall Log Law w/Sinusoidal Perturbations
             elif special_case == '2':
-                cnfg_ic['InitialCondition'] = 'TurbulentChannelX'
+                cnfg_ic['InitialCondition'] = 'ComplexTerrainSinPerturb'
             # ABC Flow
             elif special_case == '3':
                 cnfg_ic['InitialCondition'] = 'ABCFlow'
@@ -418,7 +418,7 @@ class GIN3DConfigWriter:
             if count > 0:
                 cnfg_so['TrackCoord'] = trackCoord
 
-        # Time Series OPtions
+        # Time Series Options
         # Collect Statistics
         cnfg_so['TimeAvg'] = str(self.active('so_switch_collectStatistics'))
 
@@ -510,15 +510,16 @@ class GIN3DConfigWriter:
             # RANS-LES Blending Height
             cnfg_tm['TransitionHeight'] = self.text('tm_text_blendingHeight')
 
-            # Distance Field
+            # Distance Field --inanc
             distance_field_opt = self.text('tm_list_distanceField')
-            if distance_field_opt == 0:
+            if distance_field_opt == '0':
                 file = self.text('tm_file_distanceField')
                 if file is not None:
                     cnfg_tm['DistanceField'] = file
-                else:
-                    cnfg_tm['DistanceField'] = ''
-            elif distance_field_opt == 1:
+                #else:
+                    #cnfg_tm['DistanceField'] = ''
+            elif distance_field_opt == '1':
+                print('inanc')
                 if self.active('tm_rb_channel_x'):
                     cnfg_tm['DistanceField'] = 'TPC_X_WallNormal'
                 elif self.active('tm_rb_channel_y'):
@@ -582,13 +583,13 @@ class GIN3DConfigWriter:
 
             # Distance Field
             distance_field_opt = self.text('geom_list_distanceField')
-            if distance_field_opt == 0:
+            if distance_field_opt == '0':
                 file = self.text('geom_file_distanceField')
                 if file is not None:
                     cnfg_ge['DistanceField'] = file
                 else:
                     cnfg_ge['DistanceField'] = ''
-            elif distance_field_opt == 1:
+            elif distance_field_opt == '1':
                 if self.active('geom_rb_channel_x'):
                     cnfg_ge['DistanceField'] = 'TPC_X_WallNormal'
                 elif self.active('geom_rb_channel_y'):
@@ -703,7 +704,7 @@ class GIN3DConfigWriter:
                 self.write("# ForcingRegionBounds and ForcingRegionFlowRate tag sets need to be equal to\n")
                 self.write("# the number of regions given to the NumberForcingRegions tag.  The first\n")
                 self.write("# ForcingRegionFlowRate tag applies to the first ForcingRegionBounds tag.\n")
-                self.write("ConstantMassFlowRate  True\n")
+                self.write("ConstantMassFlowRate   ", 'True' + "\n")
 
                 numforcings = int(cnfg_main["NumberForcingRegions"])
                 self.write("NumberForcingRegions   ", str(numforcings) + "\n")
@@ -1071,15 +1072,15 @@ class GIN3DConfigWriter:
             self.write("# -------------------------------------------------------------------------------\n")
             self.write("# Set averaging to true or false.  Set the starting time for averaging to start.\n")
             self.write("# Starting time does not matter if PrecursorSim is set to True.\n")
-            self.write("TimeAvg      " + cnfg_so['TimeAvg'] + "\n")
-            self.write("StartingTime " + cnfg_so['StartingTime'] + "\n")
+            self.write("TimeAvg      ", cnfg_so['TimeAvg'] + "\n")
+            self.write("StartingTime ", cnfg_so['StartingTime'] + "\n")
             self.write("\n")
             self.write("# Set statistical quantity to calculate with TurbStats tags:\n")
             self.write("#   m   time averaging of primitive quantities\n")
             self.write("#   s   symmetric components of Reynolds stress tensor (shear)\n")
             self.write("#   d   diagonal components of Reynolds stress tensor (normal)\n")
             self.write("#   i   two-point covariance of u component in x- and y-directions\n")
-            self.write("TurbStats " + " ".join(cnfg_so['TurbStats']) + "\n")
+            self.write("TurbStats ", " ".join(cnfg_so['TurbStats']) + "\n")
             self.write("\n")
             self.write("# Pass in mean velocity profile to compute turbulent fluctuations in the\n")
             self.write("# z-direction.\n")
